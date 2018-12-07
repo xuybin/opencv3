@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+
+
+FileTree warFiles = fileTree(dir: "$buildDir/outputs/aar", includes: ['*.aar'])
+warFiles.files.each { File warFile ->
+
+    Zip tweakWarTask = tasks.create(name: taskName, type: Zip) {
+        doFirst{
+            String taskName = "tweakAar${warFile.name.replace('.aar', '')}"
+            String tmpPath=zipTree(file("$buildDir/outputs/aar/library-debug.aar")).files.first().parentFile.absolutePath
+            println(tmpPath)
+            from fileTree(tmpPath) {
+                include '/jni/**'
+                include '/res/**'
+                include '/classes.jar'
+                include '/R.txt'
+                include '/AndroidManifest.xml'
+            }
+            destinationDir = file("$buildDir/outputs/aar/")
+            archiveName = warFile.name
+        }
+    }
+    // wire the task into the dag
+    assemble.dependsOn tweakWarTask
+}

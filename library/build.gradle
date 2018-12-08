@@ -29,27 +29,27 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-
-
-FileTree warFiles = fileTree(dir: "$buildDir/outputs/aar", includes: ['*.aar'])
-warFiles.files.each { File warFile ->
-
-    Zip tweakWarTask = tasks.create(name: taskName, type: Zip) {
-        doFirst{
-            String taskName = "tweakAar${warFile.name.replace('.aar', '')}"
-            String tmpPath=zipTree(file("$buildDir/outputs/aar/library-debug.aar")).files.first().parentFile.absolutePath
-            println(tmpPath)
-            from fileTree(tmpPath) {
-                include '/jni/**'
-                include '/res/**'
-                include '/classes.jar'
-                include '/R.txt'
-                include '/AndroidManifest.xml'
-            }
-            destinationDir = file("$buildDir/outputs/aar/")
-            archiveName = warFile.name
-        }
+afterEvaluate {
+    bundleDebugAar << {
+        String srcAarName = "$project.name-debug.aar"
+        String srcAarPath = "$buildDir/outputs/aar/"
+        String tmpPath = zipTree(file(srcAarPath + srcAarName)).files.first().parentFile.absolutePath
+        tasks.create(name: 'tweakDebugAar', type: Zip) {
+            from fileTree(tmpPath)
+            destinationDir = file(srcAarPath)
+            archiveName = srcAarName
+        }.execute()
+        delete(tmpPath)
     }
-    // wire the task into the dag
-    assemble.dependsOn tweakWarTask
+    bundleReleaseAar << {
+        String srcAarName = "$project.name-release.aar"
+        String srcAarPath = "$buildDir/outputs/aar/"
+        String tmpPath = zipTree(file(srcAarPath + srcAarName)).files.first().parentFile.absolutePath
+        tasks.create(name: 'tweakReleaseAar', type: Zip) {
+            from fileTree(tmpPath)
+            destinationDir = file(srcAarPath)
+            archiveName = srcAarName
+        }.execute()
+        delete(tmpPath)
+    }
 }

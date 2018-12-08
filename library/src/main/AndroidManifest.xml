@@ -1,2 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.github.xuybin.opencv3"/>
+          package="com.github.xuybin.opencv3">
+    <uses-permission android:name="android.permission.CAMERA"/>
+</manifest>

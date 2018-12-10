@@ -19,13 +19,10 @@ install:
 
 before_script:
   - export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
-  - ls $ANDROID_NDK_HOME -al
   - wget -q https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip
   - rm -rf $ANDROID_NDK_HOME/*
-  - ls $ANDROID_NDK_HOME -al
   - unzip -qq android-ndk-r16b-linux-x86_64.zip -d $ANDROID_NDK_HOME
-  - ls $ANDROID_NDK_HOME -al
-  - mv -f $ANDROID_NDK_HOME/android-ndk-r16b $ANDROID_NDK_HOME/
+  - mv -f $ANDROID_NDK_HOME/android-ndk-r16b/* $ANDROID_NDK_HOME/
 
 script:
   - sdkmanager --list

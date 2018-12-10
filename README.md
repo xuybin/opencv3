@@ -20,5 +20,5 @@ allprojects {
 Add dependencies (you can also add other modules that you need):
 
 ```
-implementation (name:'com.github.xuybin:opencv3:${version}', ext:'aar')
+implementation 'com.github.xuybin:opencv3:${version}@aar'
 ```

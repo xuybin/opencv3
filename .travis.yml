@@ -21,7 +21,7 @@ before_script:
   - export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
 
 script:
-  - sdkmanager --list
+  - ls $ANDROID_NDK_HOME -al
   - ./gradlew assembleRelease
 
 after_success:

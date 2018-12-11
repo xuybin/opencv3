@@ -29,7 +29,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    releaseImplementation 'com.github.xuybin:opencv3:1.0.1@aar'
+    releaseImplementation 'com.github.xuybin:opencv3:1.0.3@aar'
     debugImplementation project(':library')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

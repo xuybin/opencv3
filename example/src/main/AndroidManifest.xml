@@ -18,9 +18,9 @@
         </activity>
 
         <activity android:name=".Puzzle15Activity"/>
-        <!--<activity android:name="FdActivity"-->
-            <!--android:screenOrientation="landscape"-->
-            <!--android:configChanges="keyboardHidden|orientation"/>-->
+        <activity android:name="FdActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"/>
     </application>
 
 </manifest>

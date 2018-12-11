@@ -7,6 +7,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 # 设置变量libs
 set(libs "${CMAKE_SOURCE_DIR}/src/main/jniLibs")
 
+include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
 
 ##命名一个导入的静态库(因为依赖而需导入的第三方库类库)
 #add_library(opencv_java3 SHARED IMPORTED)
@@ -35,7 +36,34 @@ add_library(
         )
 
 # 指定该共享库需要链接的库,静态库会合并到目标库的so文件内
-target_link_libraries( # Specifies the target library.
+target_link_libraries(
         hello #指定目标库中,与 add_library的库名称一定要相同
         ${log-lib} # 将目标库链接到日志库包含在NDK
+        )
+
+add_library(libopencv_java3 SHARED IMPORTED )
+set_target_properties(libopencv_java3 PROPERTIES
+        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_java3.so")
+
+add_library(libopencv_core STATIC IMPORTED )
+set_target_properties(libopencv_core PROPERTIES
+        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_core.a")
+
+add_library(libopencv_objdetect STATIC IMPORTED )
+set_target_properties(libopencv_objdetect PROPERTIES
+        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_objdetect.a")
+
+add_library(
+        detection_based_tracker
+        SHARED
+        src/main/cpp/DetectionBasedTracker_jni.cpp
+)
+
+
+target_link_libraries(
+        detection_based_tracker
+        libopencv_java3
+        libopencv_core
+        libopencv_objdetect
+        ${log-lib}
         )

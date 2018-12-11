@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
                btn_hello_ndk.text=HelloNDKforJava.sayHelloJava()
            }
         }
-
+        btn_face_detection.setOnClickListener {
+            startActivity(Intent(this,FdActivity::class.java))
+        }
     }
 
 }

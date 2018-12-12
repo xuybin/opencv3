@@ -3,7 +3,6 @@ FROM ubuntu:18.04
 # Set environmental variables
 ENV ANDROID_HOME /opt/android/sdk
 ENV ANDROID_NDK ${ANDROID_HOME}/ndk-bundle
-ENV ANDROID_NDK ${ANDROID_HOME}/ndk-bundle
 ENV OPENCV_DIR /opencv
 ENV OPENCV_CONTRIB_DIR /opencv_contrib
 ENV OPENCV_ANDROID /opencv_android

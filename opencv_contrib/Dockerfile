@@ -9,7 +9,7 @@ ENV OPENCV_ANDROID /opencv_android
 ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK}:${PATH}
 
 # Download and install Android SDK
-RUN sudo apt-get install python ant openjdk-8-jdk cmake unzip && mkdir -p ${ANDROID_HOME} ${ANDROID_NDK} ${OPENCV_DIR} ${OPENCV_CONTRIB_DIR} ${OPENCV_ANDROID} && \
+RUN sudo apt-get install -y python ant openjdk-8-jdk cmake unzip && mkdir -p ${ANDROID_HOME} ${ANDROID_NDK} ${OPENCV_DIR} ${OPENCV_CONTRIB_DIR} ${OPENCV_ANDROID} && \
   wget -q https://dl.google.com/android/repository/tools_r25.2.5-linux.zip  && unzip -q tools_r25.2.5-linux.zip -d ${ANDROID_HOME} && \
   wget -q http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin && chmod +x android-ndk-r10e-linux-x86_64.bin && ./android-ndk-r10e-linux-x86_64.bin && rm -rf ./android-ndk-r10e-linux-x86_64.bin  && mv ./android-ndk-r10e/* ${ANDROID_NDK}/ && rm -rf ./android-ndk-r10e && \
   wget -q https://github.com/opencv/opencv/archive/3.4.4.zip && unzip -q 3.4.4.zip && rm -rf 3.4.4.zip && mv ./opencv-3.4.4 ${OPENCV_DIR}/ && rm -rf  ./opencv-3.4.4   && \

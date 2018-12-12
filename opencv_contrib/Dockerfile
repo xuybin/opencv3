@@ -15,5 +15,5 @@ RUN sudo apt-get install -y python ant openjdk-8-jdk cmake unzip && mkdir -p ${A
   wget -q https://github.com/opencv/opencv/archive/3.4.4.zip && unzip -q 3.4.4.zip && rm -rf 3.4.4.zip && mv ./opencv-3.4.4 ${OPENCV_DIR}/ && rm -rf  ./opencv-3.4.4   && \
   wget -q https://github.com/opencv/opencv_contrib/archive/3.4.4.zip && unzip -q 3.4.4.zip && rm -rf 3.4.4.zip && mv ./opencv-3.4.4 ${OPENCV_CONTRIB_DIR}/ && rm -rf  ./opencv-3.4.4   && \
   mkdir -p ${ANDROID_HOME}/licenses && echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" >${ANDROID_HOME}/licenses/android-sdk-license && sdkmanager "platform-tools" "platforms;android-25" "build-tools;25.0.3" "emulator" "extras;android;m2repository" "extras;google;m2repository" "extras;google;google_play_services" && \
-  android-sdk/tools/bin/sdkmanager --list  && \
+  sdkmanager --list  && \
   python2 ${OPENCV_DIR}/platforms/android/build_sdk.py --config ndk-10.config.py --extra_modules_path ${OPENCV_CONTRIB_DIR}/modules --sdk_path ${ANDROID_HOME} --ndk_path ${ANDROID_NDK} ${OPENCV_ANDROID} ${OPENCV_DIR}

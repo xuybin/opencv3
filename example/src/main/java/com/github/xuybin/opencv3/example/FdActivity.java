@@ -3,6 +3,7 @@ package com.github.xuybin.opencv3.example;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.*;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
@@ -22,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 public class FdActivity extends Activity implements CvCameraViewListener2 {
 
@@ -37,12 +40,13 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
     private MenuItem               mItemType;
 
     private Mat mRgba;
+    private Mat mRgb;
     private Mat mGray;
     private File                   mCascadeFile;
     private CascadeClassifier mJavaDetector;
     private DetectionBasedTracker mNativeDetector;
 
-    private int                    mDetectorType       = JAVA_DETECTOR;
+    private int                    mDetectorType       = NATIVE_DETECTOR;
     private String[]               mDetectorName;
 
     private float                  mRelativeFaceSize   = 0.2f;
@@ -153,30 +157,36 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
     public void onCameraViewStarted(int width, int height) {
         mGray = new Mat();
         mRgba = new Mat();
+        mRgb= new Mat();
     }
 
     public void onCameraViewStopped() {
         mGray.release();
         mRgba.release();
+        mRgb.release();
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 
         mRgba = inputFrame.rgba();
+        // 获取 灰度图片
         mGray = inputFrame.gray();
-
+        // 确定最小面部尺寸
         if (mAbsoluteFaceSize == 0) {
             int height = mGray.rows();
+            // 根据相对比例 确定面部尺寸
             if (Math.round(height * mRelativeFaceSize) > 0) {
                 mAbsoluteFaceSize = Math.round(height * mRelativeFaceSize);
             }
             mNativeDetector.setMinFaceSize(mAbsoluteFaceSize);
         }
 
+        // 用于保存监测到的人脸（矩阵头和存储所有像素值的矩阵指针）
         MatOfRect faces = new MatOfRect();
 
         if (mDetectorType == JAVA_DETECTOR) {
             if (mJavaDetector != null)
+                // 适当地缩小检测图片,提升一定的检测速度
                 mJavaDetector.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
                         new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
         }
@@ -189,11 +199,18 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         }
 
         Rect[] facesArray = faces.toArray();
-        for (int i = 0; i < facesArray.length; i++)
+        //循环所有监测到的人脸
+        for (int i = 0; i < facesArray.length; i++) {
+            //保存监测的人脸小图片
+            Imgproc.cvtColor(mRgba,mRgb,Imgproc.COLOR_RGBA2RGB);
+            Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mRgb, facesArray[i]));
+            Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mGray, facesArray[i]));
+            //在image图片上画框,pt1,pt2可确定框的位置和大小,color是框的颜色,thicknes框厚度
             Imgproc.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
-
+        }
         return mRgba;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

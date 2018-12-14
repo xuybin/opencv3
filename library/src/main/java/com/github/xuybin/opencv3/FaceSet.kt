@@ -15,8 +15,8 @@ class label
 interface FaceSet {
     val faceRecognizer: FaceRecognizer
     fun search(imagePath: String): Pair<Int, Double> {
-        // Load the test image:
-        val originalImage = Imgcodecs.imread(imagePath.trim(),CV_LOAD_IMAGE_GRAYSCALE)
+        // Load the test image: ,CV_LOAD_IMAGE_GRAYSCALE
+        val originalImage = Imgcodecs.imread(imagePath.trim())
         var grayImage = when (imagePath.trim().substringAfterLast(".").toLowerCase()) {
             "png" -> {
                 var grayImg = Mat(originalImage.width(), originalImage.height(), CvType.CV_8UC1)

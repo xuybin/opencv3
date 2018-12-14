@@ -30,6 +30,8 @@
         <activity android:name="FdActivity"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation"/>
-
+        <activity android:name="FdActivity1"
+                  android:screenOrientation="portrait"
+                  android:configChanges="keyboardHidden|orientation"/>
     </application>
 </manifest>

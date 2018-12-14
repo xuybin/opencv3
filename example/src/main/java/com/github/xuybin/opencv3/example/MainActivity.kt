@@ -26,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         btn_face_detection.setOnClickListener {
             startActivity(Intent(this,FdActivity::class.java))
         }
+        button4.setOnClickListener {
+            startActivity(Intent(this,FdActivity1::class.java))
+        }
+
     }
 
 }

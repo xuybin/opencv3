@@ -13,8 +13,7 @@ import org.opencv.imgproc.Imgproc
 import java.io.File
 import java.lang.Exception
 
-class label
-open class FaceSet(var faceRecognizer: FaceRecognizer) {
+open class FaceSet(protected val faceRecognizer: FaceRecognizer) {
     fun search(imagePath: String): Pair<Int, Double> {
         // Load the test image: ,CV_LOAD_IMAGE_GRAYSCALE
         val originalImage = Imgcodecs.imread(imagePath.trim())
@@ -42,6 +41,12 @@ open class FaceSet(var faceRecognizer: FaceRecognizer) {
         return Pair(label[0], confidence[0])
     }
 
+    // 保存特征脸库
+    fun save(filename: String) {
+        faceRecognizer.save(filename)
+    }
+
+    // 从目录文件训练特征脸库
     protected fun train(trainingDir: String, formatSuffix: String, getLabel: (absolutePath: String) -> Int) {
         val images = mutableListOf<Mat>()
         val labels = mutableListOf<Int>()
@@ -79,6 +84,11 @@ open class FaceSet(var faceRecognizer: FaceRecognizer) {
             fromList(labels)
         }
         faceRecognizer.train(images, labelMats)
+    }
+
+    // 加载特征脸库
+    protected fun load(filename: String) {
+        faceRecognizer.read(filename)
     }
 }
 
@@ -120,6 +130,35 @@ class FaceSetLBPH(faceRecognizer: LBPHFaceRecognizer) : FaceSet(faceRecognizer) 
                 it.train(trainingDir, formatSuffix, getLabel)
             }
         }
+
+        fun init(
+            filename: String,
+            radius: Int? = null,
+            neighbors: Int? = null,
+            gridx: Int? = null,
+            gridy: Int? = null,
+            threshold: Double? = null
+        ): FaceSetLBPH {
+            return when {
+                radius == null && neighbors == null && gridx == null && gridy == null && threshold == null -> FaceSetLBPH(
+                    LBPHFaceRecognizer.create()
+                )
+                neighbors == null && gridx == null && gridy == null && threshold == null -> FaceSetLBPH(
+                    LBPHFaceRecognizer.create(radius!!)
+                )
+                gridx == null && gridy == null && threshold == null -> FaceSetLBPH(
+                    LBPHFaceRecognizer.create(radius!!, neighbors!!)
+                )
+                gridy == null && threshold == null -> FaceSetLBPH(
+                    LBPHFaceRecognizer.create(radius!!, neighbors!!, gridx!!)
+                )
+                threshold == null -> FaceSetLBPH(LBPHFaceRecognizer.create(radius!!, neighbors!!, gridx!!, gridy!!))
+                else -> FaceSetLBPH(LBPHFaceRecognizer.create(radius!!, neighbors!!, gridx!!, gridy!!, threshold!!))
+            }.also {
+                // 加载特征脸库
+                it.load(filename)
+            }
+        }
     }
 
 }
@@ -147,6 +186,21 @@ class FaceSetFisher(faceRecognizer: FisherFaceRecognizer) : FaceSet(faceRecogniz
                 it.train(trainingDir, formatSuffix, getLabel)
             }
         }
+
+        fun init(
+            filename: String,
+            num_components: Int? = null,
+            threshold: Double? = null
+        ): FaceSetFisher {
+            return when {
+                num_components == null && threshold == null -> FaceSetFisher(FisherFaceRecognizer.create())
+                threshold == null -> FaceSetFisher(FisherFaceRecognizer.create(num_components!!))
+                else -> FaceSetFisher(FisherFaceRecognizer.create(num_components!!, threshold!!))
+            }.also {
+                // 加载特征脸库
+                it.load(filename)
+            }
+        }
     }
 }
 
@@ -171,6 +225,21 @@ class FaceSetEigen(faceRecognizer: EigenFaceRecognizer) : FaceSet(faceRecognizer
             }.also {
                 // 训练特征脸库
                 it.train(trainingDir, formatSuffix, getLabel)
+            }
+        }
+
+        fun init(
+            filename: String,
+            num_components: Int? = null,
+            threshold: Double? = null
+        ): FaceSetEigen {
+            return when {
+                num_components == null && threshold == null -> FaceSetEigen(EigenFaceRecognizer.create())
+                threshold == null -> FaceSetEigen(EigenFaceRecognizer.create(num_components!!))
+                else -> FaceSetEigen(EigenFaceRecognizer.create(num_components!!, threshold!!))
+            }.also {
+                // 加载特征脸库
+                it.load(filename)
             }
         }
     }

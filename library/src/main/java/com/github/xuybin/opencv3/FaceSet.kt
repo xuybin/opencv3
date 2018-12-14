@@ -46,8 +46,24 @@ open class FaceSet(protected val faceRecognizer: FaceRecognizer) {
         faceRecognizer.save(filename)
     }
 
+    // 从目录文件[训练]更新特征脸库
+    fun update(trainingDir: String, formatSuffix: String, getLabel: (absolutePath: String) -> Int){
+        val imageMat=getImageMat(trainingDir,formatSuffix,getLabel)
+        faceRecognizer.update(imageMat.first, imageMat.second)
+    }
+
     // 从目录文件训练特征脸库
     protected fun train(trainingDir: String, formatSuffix: String, getLabel: (absolutePath: String) -> Int) {
+        val imageMat=getImageMat(trainingDir,formatSuffix,getLabel)
+        faceRecognizer.train(imageMat.first, imageMat.second)
+    }
+
+    // 加载特征脸库
+    protected fun load(filename: String) {
+        faceRecognizer.read(filename)
+    }
+
+    private fun getImageMat(trainingDir: String, formatSuffix: String, getLabel: (absolutePath: String) -> Int):Pair<List<Mat>, Mat>{
         val images = mutableListOf<Mat>()
         val labels = mutableListOf<Int>()
 
@@ -83,12 +99,7 @@ open class FaceSet(protected val faceRecognizer: FaceRecognizer) {
         val labelMats = MatOfInt().apply {
             fromList(labels)
         }
-        faceRecognizer.train(images, labelMats)
-    }
-
-    // 加载特征脸库
-    protected fun load(filename: String) {
-        faceRecognizer.read(filename)
+        return Pair(images,labelMats)
     }
 }
 

@@ -202,11 +202,11 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         //循环所有监测到的人脸
         for (int i = 0; i < facesArray.length; i++) {
             //保存监测的人脸小图片
-            Imgproc.cvtColor(mRgba,mRgb,Imgproc.COLOR_RGBA2BGR);
-            Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mRgb, facesArray[i]));
-            Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mGray, facesArray[i]));
+            //Imgproc.cvtColor(mRgba,mRgb,Imgproc.COLOR_RGBA2BGR);
+            //Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mRgb, facesArray[i]));
+            //Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mGray, facesArray[i]));
             //在image图片上画框,pt1,pt2可确定框的位置和大小,color是框的颜色,thicknes框厚度
-            Imgproc.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
+            Imgproc.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 1);
         }
         return mRgba;
     }

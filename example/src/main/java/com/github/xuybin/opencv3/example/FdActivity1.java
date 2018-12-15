@@ -11,9 +11,6 @@ import android.view.View;
 import android.view.WindowManager;
 import com.github.xuybin.opencv3.DetectionBasedTracker;
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.*;
@@ -24,6 +21,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import com.github.xuybin.opencv3.CameraBridgeViewBase;
+import com.github.xuybin.opencv3.CameraBridgeViewBase.CvCameraViewFrame;
+import com.github.xuybin.opencv3.CameraBridgeViewBase.CvCameraViewListener2;
 
 public class FdActivity1 extends Activity implements CvCameraViewListener2 {
 

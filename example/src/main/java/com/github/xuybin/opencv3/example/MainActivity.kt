@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.github.xuybin.opencv3.HelloNDKforJava
 import com.github.xuybin.opencv3.HelloNDKforKotlin
+import com.github.xuybin.opencv3.example.CameraCalibration.CameraCalibrationActivity
+import com.github.xuybin.opencv3.example.FaceDetection.FdActivity
+import com.github.xuybin.opencv3.example.Puzzle15.Puzzle15Activity
 import kotlinx.android.synthetic.main.activity_main.*;
 class MainActivity : AppCompatActivity() {
 
@@ -13,11 +16,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // 15格拼图
         btn_15_puzzle.setOnClickListener {
-            startActivity(Intent(this,Puzzle15Activity::class.java))
+            startActivity(Intent(this, Puzzle15Activity::class.java))
         }
         // 相机校准
         btn_camera_calibration.setOnClickListener {
-
+            startActivity(Intent(this, CameraCalibrationActivity::class.java))
         }
         // 彩色斑点检测
         btn_color_blob_detection.setOnClickListener{
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // 人脸面部检测
         btn_face_detection.setOnClickListener {
-            startActivity(Intent(this,FdActivity::class.java))
+            startActivity(Intent(this, FdActivity::class.java))
         }
 
         // 人脸面部检测和识别

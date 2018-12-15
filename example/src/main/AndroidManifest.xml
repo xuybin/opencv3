@@ -28,13 +28,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Puzzle15Activity"/>
+        <activity android:name=".Puzzle15.Puzzle15Activity"/>
         <activity
-                android:name=".FdActivity"
+                android:name=".FaceDetection.FdActivity"
                 android:configChanges="keyboardHidden|orientation"
                 android:screenOrientation="landscape"/>
+
+        <activity android:name=".CameraCalibration.CameraCalibrationActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
         <activity
-                android:name=".FdActivity1"
+                android:name=".FaceDetection.FdActivity1"
                 android:configChanges="keyboardHidden|orientation"
                 android:screenOrientation="portrait"/>
         <activity android:name=".FaceDetectionRecognizerActivity">

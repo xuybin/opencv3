@@ -1,4 +1,4 @@
-package com.github.xuybin.opencv3.example;
+package com.github.xuybin.opencv3.example.FaceDetection;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import com.github.xuybin.opencv3.DetectionBasedTracker;
+import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -22,9 +23,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.github.xuybin.opencv3.CameraBridgeViewBase;
-import com.github.xuybin.opencv3.CameraBridgeViewBase.CvCameraViewFrame;
-import com.github.xuybin.opencv3.CameraBridgeViewBase.CvCameraViewListener2;
+import com.github.xuybin.opencv3.FdCameraBridgeViewBase;
+import com.github.xuybin.opencv3.FdCameraBridgeViewBase.CvCameraViewFrame;
+import com.github.xuybin.opencv3.FdCameraBridgeViewBase.CvCameraViewListener2;
 
 public class FdActivity1 extends Activity implements CvCameraViewListener2 {
 
@@ -51,7 +52,7 @@ public class FdActivity1 extends Activity implements CvCameraViewListener2 {
     private float                  mRelativeFaceSize   = 0.2f;
     private int                    mAbsoluteFaceSize   = 0;
 
-    private CameraBridgeViewBase mOpenCvCameraView;
+    private FdCameraBridgeViewBase mOpenCvCameraView;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -126,8 +127,8 @@ public class FdActivity1 extends Activity implements CvCameraViewListener2 {
 
         setContentView(R.layout.face_detect_surface_view1);
 
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
-        mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
+        mOpenCvCameraView = (FdCameraBridgeViewBase) findViewById(R.id.fd_activity_surface_view);
+        mOpenCvCameraView.setVisibility(FdCameraBridgeViewBase.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setCameraIndex(mCameraIndexCount);
         findViewById(R.id.bt_cameraId).setOnClickListener(new View.OnClickListener() {

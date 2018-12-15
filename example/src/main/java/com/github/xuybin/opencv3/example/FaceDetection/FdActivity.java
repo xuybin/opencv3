@@ -1,4 +1,4 @@
-package com.github.xuybin.opencv3.example;
+package com.github.xuybin.opencv3.example.FaceDetection;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import com.github.xuybin.opencv3.DetectionBasedTracker;
+import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;

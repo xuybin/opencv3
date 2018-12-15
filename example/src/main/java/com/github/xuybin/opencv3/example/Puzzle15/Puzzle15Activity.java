@@ -1,4 +1,4 @@
-package com.github.xuybin.opencv3.example;
+package com.github.xuybin.opencv3.example.Puzzle15;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;

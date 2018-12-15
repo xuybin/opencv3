@@ -29,7 +29,7 @@ import android.view.SurfaceView;
  * frame to the screen.
  * The clients shall implement CvCameraViewListener.
  */
-public abstract class CameraBridgeViewBase extends SurfaceView implements SurfaceHolder.Callback {
+public abstract class FdCameraBridgeViewBase extends SurfaceView implements SurfaceHolder.Callback {
 
     private static final String TAG = "CameraBridge";
     private static final int MAX_UNSPECIFIED = -1;
@@ -60,7 +60,7 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
 
     private WindowManager windowManager;
 
-    public CameraBridgeViewBase(Context context, int cameraId) {
+    public FdCameraBridgeViewBase(Context context, int cameraId) {
         super(context);
         mCameraIndex = cameraId;
         getHolder().addCallback(this);
@@ -69,17 +69,17 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
 
-    public CameraBridgeViewBase(Context context, AttributeSet attrs) {
+    public FdCameraBridgeViewBase(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         int count = attrs.getAttributeCount();
         Log.d(TAG, "Attr count: " + Integer.valueOf(count));
 
-        TypedArray styledAttrs = getContext().obtainStyledAttributes(attrs, R.styleable.CameraBridgeViewBase);
-        if (styledAttrs.getBoolean(R.styleable.CameraBridgeViewBase_show_fps, false))
+        TypedArray styledAttrs = getContext().obtainStyledAttributes(attrs, R.styleable.FdCameraBridgeViewBase);
+        if (styledAttrs.getBoolean(R.styleable.FdCameraBridgeViewBase_show_fps, false))
             enableFpsMeter();
 
-        mCameraIndex = styledAttrs.getInt(R.styleable.CameraBridgeViewBase_camera_id, -1);
+        mCameraIndex = styledAttrs.getInt(R.styleable.FdCameraBridgeViewBase_camera_id, -1);
 
         getHolder().addCallback(this);
         mMaxWidth = MAX_UNSPECIFIED;

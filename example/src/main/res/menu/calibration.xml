@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/calibrate"
+              android:title="Calibrate"
+              app:showAsAction="ifRoom|withText"/>
+        <item android:id="@+id/preview_mode"
+              android:title="Preview mode">
+              <menu>
+                  <group android:checkableBehavior="single">
+                      <item android:id="@+id/calibration"
+                            android:title="Calibration"
+                            android:checked="true" />
+                      <item android:id="@+id/undistortion"
+                            android:title="Undistortion" />
+                      <item android:id="@+id/comparison"
+                            android:title="Comparison" />
+                  </group>
+              </menu>
+        </item>
+    </group>
+</menu>

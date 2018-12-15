@@ -1,5 +1,7 @@
 package com.github.xuybin.opencv3.example.Tutorial2Mixedprocessing;
 
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import com.github.xuybin.opencv3.example.MixedProcessing;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
@@ -19,7 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-public class Tutorial2Activity extends Activity implements CvCameraViewListener2 {
+public class Tutorial2Activity extends AppCompatActivity implements CvCameraViewListener2 {
     private static final String    TAG = "OCVSample::Activity";
 
     private static final int       VIEW_MODE_RGBA     = 0;
@@ -72,7 +74,7 @@ public class Tutorial2Activity extends Activity implements CvCameraViewListener2
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.tutorial2_surface_view);
-
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.tutorial2_activity_surface_view);
         mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);

@@ -1,5 +1,6 @@
 package com.github.xuybin.opencv3.example.Puzzle15;
 
+import android.support.v7.app.AppCompatActivity;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -17,7 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
-public class Puzzle15Activity extends Activity implements CvCameraViewListener, View.OnTouchListener {
+public class Puzzle15Activity extends AppCompatActivity implements CvCameraViewListener, View.OnTouchListener {
 
     private static final String TAG = "Puzzle15";
 

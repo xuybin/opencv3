@@ -2,6 +2,8 @@ package com.github.xuybin.opencv3.example.ImageManipulations;
 
 import java.util.Arrays;
 
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
@@ -26,7 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-public class ImageManipulationsActivity extends Activity implements CvCameraViewListener2 {
+public class ImageManipulationsActivity extends AppCompatActivity implements CvCameraViewListener2 {
     private static final String  TAG                 = "OCVSample::Activity";
 
     public static final int      VIEW_MODE_RGBA      = 0;
@@ -95,7 +97,7 @@ public class ImageManipulationsActivity extends Activity implements CvCameraView
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.image_manipulations_surface_view);
-
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.image_manipulations_activity_surface_view);
         mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);

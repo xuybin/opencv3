@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
@@ -29,7 +31,7 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class Tutorial3Activity extends Activity implements CvCameraViewListener2, OnTouchListener {
+public class Tutorial3Activity extends AppCompatActivity implements CvCameraViewListener2, OnTouchListener {
     private static final String TAG = "OCVSample::Activity";
 
     private Tutorial3View mOpenCvCameraView;
@@ -69,7 +71,7 @@ public class Tutorial3Activity extends Activity implements CvCameraViewListener2
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.tutorial3_surface_view);
-
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         mOpenCvCameraView = (Tutorial3View) findViewById(R.id.tutorial3_activity_java_surface_view);
 
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -146,7 +148,7 @@ public class Tutorial3Activity extends Activity implements CvCameraViewListener2
                     Integer.valueOf(element.width).toString() + "x" + Integer.valueOf(element.height).toString());
             idx++;
          }
-
+       // menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu);
     }
 

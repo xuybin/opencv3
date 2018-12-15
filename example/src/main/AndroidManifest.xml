@@ -54,6 +54,7 @@
                   android:configChanges="keyboardHidden|orientation"/>
 
         <activity android:name=".Tutorial3Cameracontrol.Tutorial3Activity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
         <activity

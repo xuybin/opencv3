@@ -2,13 +2,18 @@ package com.github.xuybin.opencv3.example.FaceDetection;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import com.github.xuybin.opencv3.MatRotate;
 import com.github.xuybin.opencv3.example.DetectionBasedTracker;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
@@ -18,6 +23,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.*;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
@@ -26,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.opencv.imgproc.Imgproc.warpAffine;
+
 public class FdActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
     private static final String    TAG                 = "OCVSample::Activity";
@@ -33,6 +41,7 @@ public class FdActivity extends AppCompatActivity implements CvCameraViewListene
     public static final int        JAVA_DETECTOR       = 0;
     public static final int        NATIVE_DETECTOR     = 1;
 
+    private MenuItem               witchCameraId;
     private MenuItem               mItemFace50;
     private MenuItem               mItemFace40;
     private MenuItem               mItemFace30;
@@ -168,11 +177,40 @@ public class FdActivity extends AppCompatActivity implements CvCameraViewListene
         mRgb.release();
     }
 
+    boolean oneceTime=true;
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-
+        // 逆时针90°
         mRgba = inputFrame.rgba();
         // 获取 灰度图片
         mGray = inputFrame.gray();
+
+        Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
+        int ori = mConfiguration.orientation; //获取屏幕方向
+        if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {
+            //横屏
+            if (mOpenCvCameraView.getCameraIndex()==mOpenCvCameraView.CAMERA_ID_FRONT){
+                // 镜像左右反转
+                MatRotate.mirror(mRgba);
+                MatRotate.mirror(mGray);
+            }else if (mOpenCvCameraView.getCameraIndex()==mOpenCvCameraView.CAMERA_ID_BACK) {
+
+            }
+        } else if (ori == mConfiguration.ORIENTATION_PORTRAIT) {
+            //竖屏
+            if (mOpenCvCameraView.getCameraIndex()==mOpenCvCameraView.CAMERA_ID_FRONT){
+                // 逆时针旋转90度
+                MatRotate.myRotateAntiClockWise90(mRgba);
+                MatRotate.myRotateAntiClockWise90(mGray);
+                // 镜像左右反转
+                MatRotate.mirror(mRgba);
+                MatRotate.mirror(mGray);
+            }else if (mOpenCvCameraView.getCameraIndex()==mOpenCvCameraView.CAMERA_ID_BACK) {
+                //顺时针旋转90度
+                MatRotate.matRotateClockWise90(mRgba);
+                MatRotate.matRotateClockWise90(mGray);
+            }
+        }
+
         // 确定最小面部尺寸
         if (mAbsoluteFaceSize == 0) {
             int height = mGray.rows();
@@ -250,6 +288,7 @@ public class FdActivity extends AppCompatActivity implements CvCameraViewListene
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.i(TAG, "called onCreateOptionsMenu");
+        witchCameraId = menu.add("切换摄像头");
         mItemFace50 = menu.add("Face size 50%");
         mItemFace40 = menu.add("Face size 40%");
         mItemFace30 = menu.add("Face size 30%");
@@ -258,9 +297,19 @@ public class FdActivity extends AppCompatActivity implements CvCameraViewListene
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.i(TAG, "called onOptionsItemSelected; selected item: " + item);
+        if (item == witchCameraId) {
+            mOpenCvCameraView.disableView();
+            if (mOpenCvCameraView.getCameraIndex()!=mOpenCvCameraView.CAMERA_ID_FRONT){
+                mOpenCvCameraView.setCameraIndex(mOpenCvCameraView.CAMERA_ID_FRONT);
+            }else {
+                mOpenCvCameraView.setCameraIndex(mOpenCvCameraView.CAMERA_ID_BACK);
+            }
+            mOpenCvCameraView.enableView();
+        }
         if (item == mItemFace50)
             setMinFaceSize(0.5f);
         else if (item == mItemFace40)

@@ -33,8 +33,7 @@
         <activity
                 android:name=".FaceDetection.FdActivity"
                 android:theme="@style/AppTheme.NoActionBar"
-                android:configChanges="keyboardHidden|orientation"
-                android:screenOrientation="landscape"/>
+                android:configChanges="keyboardHidden|orientation"/>
 
         <activity android:name=".CameraCalibration.CameraCalibrationActivity"
                   android:theme="@style/AppTheme.NoActionBar"
@@ -64,10 +63,6 @@
                   android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
-        <activity
-                android:name=".FaceDetection.FdActivity1"
-                android:configChanges="keyboardHidden|orientation"
-                android:screenOrientation="portrait"/>
         <activity android:name=".FaceDetectionRecognizerActivity">
         </activity>
     </application>

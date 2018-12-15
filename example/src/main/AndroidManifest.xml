@@ -28,28 +28,35 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Puzzle15.Puzzle15Activity"/>
+        <activity android:name=".Puzzle15.Puzzle15Activity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".FaceDetection.FdActivity"
+                android:theme="@style/AppTheme.NoActionBar"
                 android:configChanges="keyboardHidden|orientation"
                 android:screenOrientation="landscape"/>
 
         <activity android:name=".CameraCalibration.CameraCalibrationActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".ColorBlobDetection.ColorBlobDetectionActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
 
         <activity android:name=".ImageManipulations.ImageManipulationsActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
 
         <activity android:name=".Tutorial1CameraPreview.Tutorial1Activity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
 
         <activity android:name=".Tutorial2Mixedprocessing.Tutorial2Activity"
+                  android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
 

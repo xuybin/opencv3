@@ -3,7 +3,6 @@ package com.github.xuybin.opencv3.example
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.github.xuybin.opencv3.HelloNDKforJava
 import com.github.xuybin.opencv3.HelloNDKforKotlin
 import kotlinx.android.synthetic.main.activity_main.*;
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         btn_face_detection.setOnClickListener {
             startActivity(Intent(this,FdActivity::class.java))
         }
-        button4.setOnClickListener {
+        btn_face_detection_recognizer.setOnClickListener {
             startActivity(Intent(this,FdActivity1::class.java))
         }
 

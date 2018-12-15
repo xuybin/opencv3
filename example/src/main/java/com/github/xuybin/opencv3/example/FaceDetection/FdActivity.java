@@ -3,12 +3,11 @@ package com.github.xuybin.opencv3.example.FaceDetection;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import com.github.xuybin.opencv3.DetectionBasedTracker;
+import com.github.xuybin.opencv3.example.DetectionBasedTracker;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -17,7 +16,6 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.*;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
@@ -25,7 +23,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.UUID;
 
 public class FdActivity extends Activity implements CvCameraViewListener2 {
 
@@ -98,6 +95,8 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     }
 
                     mOpenCvCameraView.enableView();
+//                    mOpenCvCameraView.setCameraIndex(1);
+//                    mOpenCvCameraView.enableFpsMeter();
                 } break;
                 default:
                 {
@@ -208,6 +207,39 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
             //Imgcodecs.imwrite(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath()+File.separator+UUID.randomUUID().toString()+".jpg" , new Mat(mGray, facesArray[i]));
             //在image图片上画框,pt1,pt2可确定框的位置和大小,color是框的颜色,thicknes框厚度
             Imgproc.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 1);
+            double xCenter = -1;
+            double yCenter = -1;
+            xCenter = (facesArray[i].x + facesArray[i].width + facesArray[i].x) / 2;
+            yCenter = (facesArray[i].y + facesArray[i].y + facesArray[i].height) / 2;
+            Point center = new Point(xCenter, yCenter);
+
+            Imgproc.circle(mRgba, center, 10, new Scalar(255, 0, 0, 255), 1);
+
+            Imgproc.putText(mRgba, "[" + center.x + "," + center.y + "]",
+                    new Point(center.x + 20, center.y + 20),
+                    Core.FONT_HERSHEY_SIMPLEX, 0.7, new Scalar(255, 255, 255,
+                            255));
+
+            Rect r = facesArray[i];
+            // compute the eye area
+            Rect eyearea = new Rect(r.x + r.width / 8,
+                    (int) (r.y + (r.height / 4.5)), r.width - 2 * r.width / 8,
+                    (int) (r.height / 3.0));
+            // split it
+            Rect eyearea_right = new Rect(r.x + r.width / 16,
+                    (int) (r.y + (r.height / 4.5)),
+                    (r.width - 2 * r.width / 16) / 2, (int) (r.height / 3.0));
+            Rect eyearea_left = new Rect(r.x + r.width / 16
+                    + (r.width - 2 * r.width / 16) / 2,
+                    (int) (r.y + (r.height / 4.5)),
+                    (r.width - 2 * r.width / 16) / 2, (int) (r.height / 3.0));
+            // draw the area - mGray is working grayscale mat, if you want to
+            // see area in rgb preview, change mGray to mRgba
+           Imgproc.rectangle(mRgba, eyearea_left.tl(), eyearea_left.br(),
+                    new Scalar(255, 0, 0, 255), 2);
+            Imgproc.rectangle(mRgba, eyearea_right.tl(), eyearea_right.br(),
+                    new Scalar(255, 0, 0, 255), 2);
+
         }
         return mRgba;
     }

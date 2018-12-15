@@ -37,6 +37,25 @@
         <activity android:name=".CameraCalibration.CameraCalibrationActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".ColorBlobDetection.ColorBlobDetectionActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
+
+        <activity android:name=".ImageManipulations.ImageManipulationsActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
+
+        <activity android:name=".Tutorial1CameraPreview.Tutorial1Activity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
+
+        <activity android:name=".Tutorial2Mixedprocessing.Tutorial2Activity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
+
+        <activity android:name=".Tutorial3Cameracontrol.Tutorial3Activity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="keyboardHidden|orientation"/>
         <activity
                 android:name=".FaceDetection.FdActivity1"
                 android:configChanges="keyboardHidden|orientation"

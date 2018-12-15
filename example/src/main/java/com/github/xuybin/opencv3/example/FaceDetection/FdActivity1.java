@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import com.github.xuybin.opencv3.DetectionBasedTracker;
+import com.github.xuybin.opencv3.example.DetectionBasedTracker;
 import com.github.xuybin.opencv3.example.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -23,9 +23,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.github.xuybin.opencv3.FdCameraBridgeViewBase;
-import com.github.xuybin.opencv3.FdCameraBridgeViewBase.CvCameraViewFrame;
-import com.github.xuybin.opencv3.FdCameraBridgeViewBase.CvCameraViewListener2;
+import com.github.xuybin.opencv3.example.FdCameraBridgeViewBase;
+import com.github.xuybin.opencv3.example.FdCameraBridgeViewBase.CvCameraViewFrame;
+import com.github.xuybin.opencv3.example.FdCameraBridgeViewBase.CvCameraViewListener2;
 
 public class FdActivity1 extends Activity implements CvCameraViewListener2 {
 

@@ -46,21 +46,21 @@ add_library(libopencv_java3 SHARED IMPORTED )
 set_target_properties(libopencv_java3 PROPERTIES
         IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_java3.so")
 
-add_library(libopencv_core STATIC IMPORTED )
-set_target_properties(libopencv_core PROPERTIES
-        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_core.a")
-
-add_library(libopencv_objdetect STATIC IMPORTED )
-set_target_properties(libopencv_objdetect PROPERTIES
-        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_objdetect.a")
-
-add_library(libopencv_features2d SHARED IMPORTED )
-set_target_properties(libopencv_features2d PROPERTIES
-        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_features2d.a")
-
-add_library(libopencv_imgproc SHARED IMPORTED )
-set_target_properties(libopencv_imgproc PROPERTIES
-        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_imgproc.a")
+#add_library(libopencv_core STATIC IMPORTED )
+#set_target_properties(libopencv_core PROPERTIES
+#        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_core.a")
+#
+#add_library(libopencv_objdetect STATIC IMPORTED )
+#set_target_properties(libopencv_objdetect PROPERTIES
+#        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_objdetect.a")
+#
+#add_library(libopencv_features2d SHARED IMPORTED )
+#set_target_properties(libopencv_features2d PROPERTIES
+#        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_features2d.a")
+#
+#add_library(libopencv_imgproc SHARED IMPORTED )
+#set_target_properties(libopencv_imgproc PROPERTIES
+#        IMPORTED_LOCATION "${libs}/${ANDROID_ABI}/libopencv_imgproc.a")
 
 
 
@@ -74,8 +74,6 @@ add_library(
 target_link_libraries(
         detection_based_tracker
         libopencv_java3
-        libopencv_core
-        libopencv_objdetect
         ${log-lib}
         )
 
@@ -90,8 +88,5 @@ add_library(
 target_link_libraries(
         mixed_sample #指定目标库中,与 add_library的库名称一定要相同
         libopencv_java3
-        libopencv_core
-        libopencv_features2d
-        libopencv_imgproc
         ${log-lib} # 将目标库链接到日志库包含在NDK
 )

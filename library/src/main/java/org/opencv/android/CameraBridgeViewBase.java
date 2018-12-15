@@ -3,6 +3,7 @@ package org.opencv.android;
 import java.util.List;
 
 import com.github.xuybin.opencv3.BuildConfig;
+import com.github.xuybin.opencv3.MatRotate;
 import com.github.xuybin.opencv3.R;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -89,7 +90,9 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
     public void setCameraIndex(int cameraIndex) {
         this.mCameraIndex = cameraIndex;
     }
-
+    public int getCameraIndex() {
+       return this.mCameraIndex;
+    }
     public interface CvCameraViewListener {
         /**
          * This method is invoked when camera preview has started. After this method is invoked
@@ -397,6 +400,9 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
         boolean bmpValid = true;
         if (modified != null) {
             try {
+                if(mCacheBitmap.getHeight()!=modified.rows() ||  mCacheBitmap.getWidth()!=modified.cols()){
+                    mCacheBitmap=MatRotate.setImgSize(mCacheBitmap,modified.cols(), modified.rows());
+                }
                 Utils.matToBitmap(modified, mCacheBitmap);
             } catch(Exception e) {
                 Log.e(TAG, "Mat type: " + modified);

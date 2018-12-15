@@ -2,7 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_github_xuybin_opencv3_HelloNDKforKotlin_sayHelloKotlin(
+Java_com_github_xuybin_opencv3_example_HelloNDKforKotlin_sayHelloKotlin(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello Kotlin from C++";

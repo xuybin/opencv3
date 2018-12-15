@@ -1,4 +1,4 @@
-package com.github.xuybin.opencv3
+package com.github.xuybin.opencv3.example
 
 class HelloNDKforKotlin {
 

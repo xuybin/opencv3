@@ -1,4 +1,4 @@
-package com.github.xuybin.opencv3;
+package com.github.xuybin.opencv3.example;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;

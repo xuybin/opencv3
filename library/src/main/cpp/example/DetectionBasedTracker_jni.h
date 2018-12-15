@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (Ljava/lang/String;F)J
  * 加载人脸检测分类器
  */
-JNIEXPORT jlong JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeCreateObject
+JNIEXPORT jlong JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeCreateObject
   (JNIEnv *, jclass, jstring, jint);
 
 /*
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nat
  * Method:    nativeDestroyObject
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeDestroyObject
+JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeDestroyObject
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nati
  * Method:    nativeStart
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeStart
+JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeStart
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nati
  * Method:    nativeStop
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeStop
+JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeStop
   (JNIEnv *, jclass, jlong);
 
   /*
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nati
    * Method:    nativeSetFaceSize
    * Signature: (JI)V
    */
-  JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeSetFaceSize
+  JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeSetFaceSize
   (JNIEnv *, jclass, jlong, jint);
 
 /*
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nati
  * Method:    nativeDetect
  * Signature: (JJJ)V
  */
-JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_DetectionBasedTracker_nativeDetect
+JNIEXPORT void JNICALL Java_com_github_xuybin_opencv3_example_DetectionBasedTracker_nativeDetect
   (JNIEnv *, jclass, jlong, jlong, jlong);
 
 #ifdef __cplusplus

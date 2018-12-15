@@ -1,10 +1,11 @@
-package com.github.xuybin.opencv3;
+package com.github.xuybin.opencv3.example;
 
 import java.util.List;
 
 import android.graphics.Matrix;
 import android.view.Surface;
 import android.view.WindowManager;
+import com.github.xuybin.opencv3.R;
 import org.opencv.android.FpsMeter;
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
